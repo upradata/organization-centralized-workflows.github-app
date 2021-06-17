@@ -45,6 +45,7 @@ export const dbConnect = async (appConfig: AppConfig, logger: Context[ 'log' ]):
         });
 
         connection = 'up';
+      console.log(logger)
         logger.debug('DB connection established');
     } catch (e) {
         connection = 'down';
