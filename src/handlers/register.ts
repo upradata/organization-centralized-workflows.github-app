@@ -60,7 +60,7 @@ export const handleRegister = (appConfig: AppConfig) => async (req: Request, res
     enforceProtection({
         octokit,
         repository: { owner: run.repository.owner, repo: run.repository.name },
-        name: data.name,
+        contextName: data.name,
         enforce: enforce === 'true',
         // Exclude the repository that contains the workflow
         enforceAdmin: run.repository.name !== run.config.workflows_repository && enforceAdmin === 'true',
