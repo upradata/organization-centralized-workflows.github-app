@@ -1,62 +1,61 @@
 {
-    "name": "@upradata/organization-centralized-workflows.github-app",
-    "version": "1.1.0",
-    "description": "Need to centrally manage and run Actions workflows across multiple repositories? This app does it for you.",
-    "author": {
-        "name": "Thomas Milotti",
-        "email": "thomas.milotti@gmail.com",
-        "url": "https://github.com/milottit"
-    },
-    "license": "MIT",
-    "repository": "https://github.com/upradata/organization-workflows-github-app.git",
-    "homepage": "https://github.com/upradata/organization-workflows-github-app/",
-    "bugs": "https://github.com/upradata/organization-workflows-github-app/issues",
-    "keywords": [
-        "probot",
-        "github",
-        "probot-app",
-        "github-app",
-        "github workflow",
-        "github organization"
-    ],
-    "scripts": {
-        "build": "tsc",
-        "build:watch": "tsc && (tsc -w --preserveWatchOutput & nodemon)",
-        "dev": "npm run build:watch",
-        "start": "probot run ./lib/index.js",
-        "start:dev": "sudo service mongod start && npm run start",
-        "lint": "eslint src/**/*.ts --fix",
-        "test": "jest && npm run lint",
-        "test:watch": "jest --watch --notify --notifyMode=change --coverage"
-    },
-    "dependencies": {
-        "express": "^4.17.1",
-        "lodash.pick": "^4.4.0",
-        "mongoose": "^5.12.14",
-        "node-fetch": "^2.6.1",
-        "probot": "^11.4.1"
-    },
-    "devDependencies": {
-        "@types/jest": "^26.0.23",
-        "@types/lodash.pick": "^4.4.6",
-        "@types/node": "^15.12.2",
-        "@types/node-fetch": "^2.5.10",
-        "@typescript-eslint/eslint-plugin": "^4.27.0",
-        "@typescript-eslint/parser": "^4.27.0",
-        "eslint": "^7.28.0",
-        "jest": "27.0.4",
-        "mockingoose": "^2.15.2",
-        "nock": "^13.1.0",
-        "nodemon": "^2.0.7",
-        "smee-client": "^1.2.2",
-        "standard": "^16.0.3",
-        "ts-jest": "27.0.3",
-        "typescript": "^4.3.2"
-    },
-    "engines": {
-        "node": ">= 12.x"
-    },
-    "jest": {
-        "testEnvironment": "node"
-    }
+  "name": "@upradata/organization-centralized-workflows.github-app",
+  "version": "1.1.0",
+  "description": "Need to centrally manage and run Actions workflows across multiple repositories? This app does it for you.",
+  "author": {
+    "name": "Thomas Milotti",
+    "email": "thomas.milotti@gmail.com",
+    "url": "https://github.com/milottit"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/upradata/organization-workflows-github-app.git",
+  "homepage": "https://github.com/upradata/organization-workflows-github-app/",
+  "bugs": "https://github.com/upradata/organization-workflows-github-app/issues",
+  "keywords": [
+    "probot",
+    "github",
+    "probot-app",
+    "github-app",
+    "github workflow",
+    "github organization"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc && (tsc -w --preserveWatchOutput & nodemon)",
+    "dev": "npm run build:watch",
+    "start": "probot run ./lib/index.js",
+    "start:dev": "sudo service mongod start && npm run start",
+    "lint": "eslint src/**/*.ts --fix",
+    "test": "jest && npm run lint",
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "lodash.pick": "^4.4.0",
+    "mongoose": "^5.12.14",
+    "node-fetch": "^2.6.1",
+    "probot": "^11.4.1",
+    "@types/jest": "^26.0.23",
+    "@types/lodash.pick": "^4.4.6",
+    "@types/node": "^15.12.2",
+    "@types/node-fetch": "^2.5.10",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "eslint": "^7.28.0",
+    "jest": "27.0.4",
+    "mockingoose": "^2.15.2",
+    "nock": "^13.1.0",
+    "nodemon": "^2.0.7",
+    "smee-client": "^1.2.2",
+    "standard": "^16.0.3",
+    "ts-jest": "27.0.3",
+    "typescript": "^4.3.2"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">= 12.x"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
 }
