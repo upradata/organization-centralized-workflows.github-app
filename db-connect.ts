@@ -1,41 +1,60 @@
-import mongoose from 'mongoose'
-const mongoUri = process.env.DB_HOST || 'localhost'
+import { Context } from 'probot';
+import mongoose from 'mongoose';
+import { AppConfig } from './config';
+import { MongoRun, mongoWorkflowsRepositoryKey } from './models';
 
-interface iStatus {
-  connection: string,
-  dbState: string
+
+
+// Update existing document with config.workflows_repository field
+export const initDatabase = (_appConfig: AppConfig, logger: Context[ 'log' ]) => MongoRun.updateMany(
+    { [ `config.${mongoWorkflowsRepositoryKey}` ]: { $exists: false } },
+    { $set: { config: { workflows_repository: '.github' } } },
+    { new: true, multi: true },
+    (err, numberAffected) => {
+        if (err)
+            return logger.error(err);
+
+        if (numberAffected?.ok) {
+            logger.debbug('updated', numberAffected.nModified, 'rows');
+        }
+    }
+);
+
+
+
+
+interface Status {
+    connection: string;
+    dbState: string;
 }
+
 
 let connection: string = 'down';
-async function dbConnect(): Promise<{ dbStatus: () => iStatus }> {
-  try {
-    await mongoose.connect(mongoUri, {
-      user: process.env.DB_USER,
-      pass: process.env.DB_PASS,
-      dbName: process.env.DB_NAME,
-      useFindAndModify: false,
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
 
-    connection = 'up'
-    console.log("DB connection established");
-  } catch (e) {
-    connection = 'down';
-    throw e;
-  }
 
-  return { dbStatus }
-}
+export const dbConnect = async (appConfig: AppConfig, logger: Context[ 'log' ]): Promise<{ dbStatus: () => Status; }> => {
+    try {
 
-function dbStatus(): iStatus  {
-  return { 
-    connection, 
-    dbState: mongoose.STATES[mongoose.connection.readyState] 
-  }
+        await mongoose.connect(appConfig.mongoUri, {
+            user: process.env.DB_USER,
+            pass: process.env.DB_PASS,
+            dbName: process.env.DB_NAME,
+            useFindAndModify: false,
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+
+        connection = 'up';
+        logger.debug('DB connection established');
+    } catch (e) {
+        connection = 'down';
+        throw e;
+    }
+
+    return { dbStatus };
 };
 
-export { dbStatus }
-export default dbConnect;
-
-
+export const dbStatus = (): Status => ({
+    connection,
+    dbState: mongoose.STATES[ mongoose.connection.readyState ]
+});
