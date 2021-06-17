@@ -47,11 +47,11 @@ project:
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone git@github.com:SvanBoxel/organization-workflow.git
+   git clone https://github.com/upradata/organization-centralized-workflows.github-app.git
    # Navigate to the newly cloned directory
-   cd organization-workflow
+   cd organization-centralized-workflows.github-app
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream git@github.com:SvanBoxel/organization-workflow.git
+   git remote add upstream https://github.com/upradata/organization-centralized-workflows.github-app.git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:

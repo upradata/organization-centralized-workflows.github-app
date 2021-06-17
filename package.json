@@ -23,7 +23,8 @@
         "build": "tsc",
         "build:watch": "tsc && (tsc -w --preserveWatchOutput & nodemon)",
         "dev": "npm run build:watch",
-        "start": "sudo service mongod start && probot run ./lib/index.js",
+        "start": "probot run ./lib/index.js",
+        "start:dev": "sudo service mongod start && npm run start",
         "lint": "eslint src/**/*.ts --fix",
         "test": "jest && npm run lint",
         "test:watch": "jest --watch --notify --notifyMode=change --coverage"
