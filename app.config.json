@@ -1,0 +1,8 @@
+{
+    "mongoUri": "mongodb://localhost:27017",
+    "githubHost": "https: //github.com",
+    "organizationRepository": ".github",
+    "appRoute": "/org-workflows",
+    "repositoryDispatchEvent": "upradata/org-workflow",
+    "userConfigPath": "organization-workflows-settings.yml"
+}

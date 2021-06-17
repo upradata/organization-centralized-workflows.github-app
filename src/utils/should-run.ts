@@ -1,13 +1,8 @@
-function shouldRun(
-  repositoryName: string, 
-  exclude: string[]
-): boolean {
-  const excludeMatch = exclude.some((repository: string) => {
-    return new RegExp('^' + repository.replace(/\*/g, '.*') + '$').test(repositoryName)
-  });    
+export const shouldRun = (repositoryName: string, exclude: string[]): boolean => {
 
-  if (excludeMatch) return false;
-  return true;
-}
+    const excludeMatch = exclude.some((repository: string) => {
+        return new RegExp('^' + repository.replace(/\*/g, '.*') + '$').test(repositoryName);
+    });
 
-export default shouldRun;
+    return !excludeMatch;
+};
