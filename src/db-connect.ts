@@ -39,7 +39,6 @@ export const dbConnect = async (appConfig: AppConfig, logger: Context[ 'log' ]):
             user: process.env.DB_USER,
             pass: process.env.DB_PASS,
             dbName: process.env.DB_NAME,
-            authMechanism: 'SCRAM-SHA-256',
             useFindAndModify: false,
             useNewUrlParser: true,
             useUnifiedTopology: true
