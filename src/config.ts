@@ -1,5 +1,5 @@
 export class AppConfig {
-    mongoUri: string = process.env.DB_HOST ?? 'mongodb://localhost:27017777';
+    mongoUri: string = process.env.DB_HOST ?? 'mongodb://localhost:27017';
     githubHost: string = process.env.GITHUB_HOST ?? 'https://github.com';
     organizationRepository: string = process.env.DEFAULT_ORGANIZATION_REPOSITORY ?? '.github';
     appRoute: string = process.env.APP_ROUTE ?? '/org-workflows';
@@ -7,9 +7,7 @@ export class AppConfig {
     userConfigPath: string = 'org-centralized-workflows.settings.yml';
 
     constructor(config: Partial<AppConfig>) {
-      console.log(config)
         Object.assign(this, config);
-      console.log(this)
     }
 }
 
