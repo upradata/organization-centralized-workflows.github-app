@@ -1,62 +1,56 @@
 import mongoose from 'mongoose';
 
-export const mongoWorkflowsRepositoryKey: keyof RunDocument[ 'config' ] = 'workflows_repository';
+export const mongoWorkflowsRepositoryKey: keyof RunDocument[ 'config' ] = 'workflowsRepository';
 
 
 const runExpiry = 60 * 60 * 24 * 90; // 90 days
 
 
 export interface Check {
-    run_id: number; // The run in the central workflow
+    runId: number; // The run in the central workflow
     name?: string; // Name of the status check
-    checks_run_id: number; // ID of status check on commit
+    checksRunId: number; // ID of status check on commit
 }
 
 
 export interface RunDocument extends mongoose.Document<{ toString: () => string; }> {
     sha: string;
-    callback_url: string;
+    callbackUrl: string;
     checks: Check[];
     repository: {
         owner: string;
         name: string;
-        full_name: string;
+        fullName: string;
     };
     config: {
-        workflows_repository: string;
+        workflowsRepository: string;
     };
-    expire_at?: Date;
+    expireAt?: Date;
 }
 
 
 export const RunSchema = new mongoose.Schema({
     sha: String,
-    callback_url: String,
+    callbackUrl: String,
     checks: [ {
-        run_id: Number,
+        runId: Number,
         name: String,
-        checks_run_id: Number
+        checksRunId: Number
     } ],
     repository: {
         owner: String,
         name: String,
-        full_name: String
+        fullName: String
     },
     config: {
-        workflows_repository: String
+        workflowsRepository: String
     }
 });
 
 
 RunSchema.index(
-    {
-        createdAt: 1,
-        unique: true,
-        sparse: true,
-    },
-    {
-        expireAfterSeconds: runExpiry
-    }
+    { createdAt: 1, unique: true, sparse: true, },
+    { expireAfterSeconds: runExpiry }
 );
 
 

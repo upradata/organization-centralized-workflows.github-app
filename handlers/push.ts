@@ -20,8 +20,8 @@ export const runOrgAction = (appConfig: AppConfig) => async (context: Context<We
 
     const excludedRepositories: string[] = config.exclude.repositories;
 
-    if (!config.include_orgnaization_repository) {
-        excludedRepositories.push(config.organization_repository);
+    if (!config.includeOrgnaizationRepository) {
+        excludedRepositories.push(config.organizationRepository);
     }
 
     if (!shouldRun(repository.name, excludedRepositories)) {
@@ -40,12 +40,12 @@ export const runOrgAction = (appConfig: AppConfig) => async (context: Context<We
         sha,
         // the App is listening to the route /register (see index.ts)
         // Any GitHub action in the organization listening to appConfig.repositoryDispatchEvent will run
-        // and callback_url will be called through the GitHub Action defined in src/../action.yml (with curl -G {callback_url} ...)
-        callback_url: `${webhook.data.url}${appConfig.appRoute}/register`,
+        // and callbackUrl will be called through the GitHub Action defined in src/../action.yml (with curl -G {callbackUrl} ...)
+        callbackUrl: `${webhook.data.url}${appConfig.appRoute}/register`,
         repository: {
             owner: repository.owner.login,
             name: repository.name,
-            full_name: repository.full_name
+            fullName: repository.full_name
         }
     };
 
@@ -61,7 +61,7 @@ export const runOrgAction = (appConfig: AppConfig) => async (context: Context<We
     // Any GitHub action in the organization listening to this event will run
     await context.octokit.repos.createDispatchEvent({
         owner: repository.owner?.login,
-        repo: config.organization_repository,
+        repo: config.organizationRepository,
         event_type: appConfig.repositoryDispatchEvent,
         client_payload: {
             id: _id?.toString(),

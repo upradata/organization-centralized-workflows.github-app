@@ -1,13 +1,14 @@
 import { Probot } from 'probot'; // eslint-disable-line @typescript-eslint/no-unused-vars
 import { Request, Response } from 'express';
-import { MongoRun, Check } from '../models';
+import { MongoRun, Check, ActionInputs } from '../models';
 import { enforceProtection } from '../utils';
 import { AppConfig } from '../config';
 
+export type RegisterRequest = Request<Record<string, string>, any, any, ActionInputs>;
 
-export const handleRegister = (appConfig: AppConfig) => async (req: Request, res: Response, { app }: { app: Probot; }): Promise<any> => {
-    // This will be called from the GitHub Action defined in src/../action.yml (with curl -G {callback_url} ...)
-    const { id, run_id, name, sha, enforce, enforceAdmin, documentation } = req.query;
+export const handleRegister = (appConfig: AppConfig) => async (req: RegisterRequest, res: Response, { app }: { app: Probot; }): Promise<any> => {
+    // This will be called from the GitHub Action defined in src/../action.yml (with curl -G {callbackUrl} ...)
+    const { id, runId, name, sha, enforce, enforceAdmin, documentation } = req.query;
 
     const run = await MongoRun.findById(id);
 
@@ -22,8 +23,8 @@ export const handleRegister = (appConfig: AppConfig) => async (req: Request, res
         owner: run.repository.owner,
         repo: run.repository.name,
         head_sha: run.sha,
-        name: name as string,
-        details_url: `${appConfig.githubHost}/${run.repository.owner}/${run.config.workflows_repository}/actions/runs/${run_id}`,
+        name,
+        details_url: `${appConfig.githubHost}/${run.repository.owner}/${run.config.workflowsRepository}/actions/runs/${runId}`,
         status: 'in_progress',
         output: undefined as any as { title: string; summary: string; }
     };
@@ -40,7 +41,7 @@ export const handleRegister = (appConfig: AppConfig) => async (req: Request, res
         try {
             const docs = await octokit.repos.getContent({
                 owner: run.repository.owner,
-                repo: run.config.workflows_repository,
+                repo: run.config.workflowsRepository,
                 path: documentation as string
             });
 
@@ -63,14 +64,14 @@ export const handleRegister = (appConfig: AppConfig) => async (req: Request, res
         contextName: data.name,
         enforce: enforce === 'true',
         // Exclude the repository that contains the workflow
-        enforceAdmin: run.repository.name !== run.config.workflows_repository && enforceAdmin === 'true',
+        enforceAdmin: run.repository.name !== run.config.workflowsRepository && enforceAdmin === 'true',
         logger: app.log
     });
 
     const checkInfo: Check = {
         name: data.name,
-        run_id: Number(run_id),
-        checks_run_id: checksRun.data.id
+        runId: Number(runId),
+        checksRunId: checksRun.data.id
     };
 
     await MongoRun.findByIdAndUpdate(id, { $push: { checks: checkInfo } });

@@ -5,10 +5,10 @@ import { MongoRun, mongoWorkflowsRepositoryKey } from './models';
 
 
 
-// Update existing document with config.workflows_repository field
+// Update existing document with config.workflowsRepository field
 export const initDatabase = (_appConfig: AppConfig, logger: Context[ 'log' ]) => MongoRun.updateMany(
     { [ `config.${mongoWorkflowsRepositoryKey}` ]: { $exists: false } },
-    { $set: { config: { workflows_repository: '.github' } } },
+    { $set: { config: { workflowsRepository: '.github' } } },
     { new: true, multi: true },
     (err, numberAffected) => {
         if (err)
