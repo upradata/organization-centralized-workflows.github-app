@@ -28,7 +28,7 @@ export const runOrgAction = (appConfig: AppConfig) => async (context: Context<We
         return;
     }
 
-    const sha = context.payload.after;
+    const sha = context.payload.after as string;
     const webhook = await context.octokit.apps.getWebhookConfigForApp();
 
     const token = await context.octokit.apps.createInstallationAccessToken({
@@ -64,7 +64,7 @@ export const runOrgAction = (appConfig: AppConfig) => async (context: Context<We
         repo: config.organization_repository,
         event_type: appConfig.repositoryDispatchEvent,
         client_payload: {
-            id: _id.toString(),
+            id: _id?.toString(),
             token: token.data.token,
             ...data,
             event: context.payload
