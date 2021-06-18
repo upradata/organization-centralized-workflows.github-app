@@ -5,25 +5,25 @@ branding:
     color: "white"
 inputs:
     id:
-        description: "ID of run (provided by GitHub app via `github.event.client_payload.id`)"
+        description: "ID of run (provided by GitHub app via `github.event.clientPayload.id`)"
         required: true
-    run_id:
-        description: "ID of workflow run (provided via GitHub syntax `github.run_id`)"
+    runId:
+        description: "ID of workflow run (provided via GitHub syntax `github.runId`)"
         required: true
     name:
         description: "Name of check (Use `github.workflow` to use the name of the workflow)"
         required: true
-    callback_url:
-        description: "Callback url for register call (provided by GitHub app via `github.event.client_payload.callback_url`)"
+    callbackUrl:
+        description: "Callback url for register call (provided by GitHub app via `github.event.clientPayload.callbackUrl`)"
         required: true
     sha:
-        description: "Sha of original commit (provided by GitHub app via `github.event.client_payload.sha`)"
+        description: "Sha of original commit (provided by GitHub app via `github.event.clientPayload.sha`)"
         required: true
     enforce:
         description: "Enforce [required status check](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/enabling-required-status-checks)"
         required: false
         default: false
-    enforce_admin:
+    enforceAdmin:
         description: "Enforce [required status check](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/enabling-required-status-checks) for admins"
         required: false
         default: false
@@ -35,12 +35,12 @@ runs:
     steps:
         - run: |
               curl -G \
-                "${{ inputs.callback_url }}" \
+                "${{ inputs.callbackUrl }}" \
                 -d id=${{ inputs.id }} \
-                -d run_id=${{ inputs.run_id }} \
+                -d runId=${{ inputs.runId }} \
                 -d sha=${{ inputs.sha }} \
                 -d enforce=${{ inputs.enforce }} \
-                -d enforce_admin=${{ inputs.enforce_admin }} \
+                -d enforceAdmin=${{ inputs.enforceAdmin }} \
                 --data-urlencode "name=${{ env.name || github.workflow }}" \
                 --data-urlencode "documentation=${{ inputs.documentation }}"
           shell: bash

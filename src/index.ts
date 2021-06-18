@@ -2,7 +2,7 @@ import { Probot } from 'probot'; // eslint-disable-line @typescript-eslint/no-un
 import { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import { dbConnect, initDatabase } from './db-connect';
-import { runOrgAction, handleRegister, handleReRun, handleCompletedRun } from './handlers';
+import { runOrgAction as handlePush, handleRegister, handleReRun, handleCompletedRun, RegisterRequest } from './handlers';
 import { AppConfig } from './config';
 import appConfigJson from '../app.config.json';
 
@@ -19,7 +19,7 @@ export default async (app: Probot, { getRouter }: { getRouter: any; }) => {
     const router = getRouter(appConfig.appRoute);
 
     // The App listens to the following events of the repositories within the organization
-    app.on([ 'push'/* , 'workflow_dispatch' */ ], runOrgAction(appConfig));
+    app.on([ 'push' ], handlePush(appConfig));
 
     app.on('workflow_run.completed', handleCompletedRun(appConfig));
     app.on('check_run.rerequested', handleReRun(appConfig));
@@ -38,7 +38,7 @@ export default async (app: Probot, { getRouter }: { getRouter: any; }) => {
     }
 
     // runWorkflow will call the organization GitHub Action listening to the trigger the GET request
-    router.get('/register', (req: Request, res: Response) => handleRegister(appConfig)(req, res, { app }));
+    router.get('/register', (req: RegisterRequest, res: Response) => handleRegister(appConfig)(req, res, { app }));
 
     router.get('/health', (_: Request, res: Response) => {
         const { connection, dbState } = dbStatus();

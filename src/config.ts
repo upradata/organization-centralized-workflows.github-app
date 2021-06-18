@@ -1,7 +1,7 @@
 export class AppConfig {
     mongoUri: string = process.env.DB_HOST ?? 'mongodb://localhost:27017';
     githubHost: string = process.env.GITHUB_HOST ?? 'https://github.com';
-    organizationRepository: string = process.env.DEFAULT_ORGANIZATION_REPOSITORY ?? '.github';
+    organizationRepository: string = process.env.DEFAULT_organizationRepository ?? '.github';
     appRoute: string = process.env.APP_ROUTE ?? '/org-workflows';
     repositoryDispatchEvent = 'upradata/org-workflow';
     userConfigPath: string = 'org-centralized-workflows.settings.yml';
@@ -15,13 +15,13 @@ export class AppConfig {
 
 
 export class DefaultUserConfig {
-    organization_repository: string;
-    include_orgnaization_repository: boolean = false;
+    organizationRepository: string;
+    includeOrgnaizationRepository: boolean = false;
     exclude = {
         repositories: [] as string[]
     };
 
     constructor(appConfig: AppConfig) {
-        this.organization_repository = appConfig.organizationRepository;
+        this.organizationRepository = appConfig.organizationRepository;
     }
 }
