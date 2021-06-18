@@ -7,3 +7,4 @@ coverage
 lib
 **/.terraform/*
 .data
+client-secret
