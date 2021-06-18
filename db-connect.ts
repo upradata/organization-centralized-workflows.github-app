@@ -15,7 +15,7 @@ export const initDatabase = (_appConfig: AppConfig, logger: Context[ 'log' ]) =>
             return logger.error(err);
 
         if (numberAffected?.ok) {
-            logger.debbug('updated', numberAffected.nModified, 'rows');
+            logger.debug('updated', numberAffected.nModified, 'rows');
         }
     }
 );
