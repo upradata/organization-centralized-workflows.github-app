@@ -13,7 +13,7 @@ export interface Check {
 }
 
 
-export interface RunDocument extends mongoose.Document {
+export interface RunDocument extends mongoose.Document<{ toString: () => string; }> {
     sha: string;
     callback_url: string;
     checks: Check[];
