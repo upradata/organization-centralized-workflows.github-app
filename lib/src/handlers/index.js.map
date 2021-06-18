@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/handlers/index.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,kDAAgC;AAChC,yCAAuB;AACvB,2CAAyB;AACzB,6CAA2B"}
+=======
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/handlers/index.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,kDAAgC;AAChC,+CAA6B;AAC7B,2CAAyB;AACzB,6CAA2B"}
+>>>>>>> cf0fc7df2f0ea23dfc56eb8b326484b9f43a11cb
