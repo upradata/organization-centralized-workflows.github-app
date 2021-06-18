@@ -23,7 +23,7 @@
         "build": "tsc",
         "build:watch": "tsc && (tsc -w --preserveWatchOutput & nodemon)",
         "dev": "npm run build:watch",
-        "start": "probot run ./lib/index.js",
+        "start": "probot run ./lib/src/index.js",
         "start:dev": "sudo service mongod start && npm run start",
         "lint": "eslint src/**/*.ts --fix",
         "test": "jest && npm run lint",
