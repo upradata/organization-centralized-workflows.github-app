@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
+=======
+    "mongoUri": "mongodb://localhost:27017",
+>>>>>>> master
     "githubHost": "https://github.com",
     "organizationRepository": ".github",
     "appRoute": "/org-workflows",
