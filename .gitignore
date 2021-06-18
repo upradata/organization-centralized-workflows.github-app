@@ -5,3 +5,14 @@ npm-debug.log
 coverage
 **/.terraform/*
 client-secret
+examples
+infra
+.devcontainer
+.github
+.vscode
+Dockerfile
+.dockerignore
+.env.example
+jest*
+test
+*.md
