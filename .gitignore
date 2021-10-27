@@ -1,7 +1,6 @@
 node_modules
 npm-debug.log
 *.pem
-!mock-cert.pem
 coverage
 **/.terraform/*
 client-secret
@@ -15,4 +14,3 @@ Dockerfile
 .env.example
 jest*
 test
-*.md

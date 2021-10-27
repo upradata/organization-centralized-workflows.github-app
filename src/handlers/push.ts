@@ -6,7 +6,7 @@ import { AppConfig, DefaultUserConfig } from '../config';
 
 
 
-export const runOrgAction = (appConfig: AppConfig) => async (context: Context<WebhookPayloadWithRepository>): Promise<void> => {
+export const handlePush = (appConfig: AppConfig) => async (context: Context<WebhookPayloadWithRepository>): Promise<void> => {
 
     const { repository = {} as WebhookPayloadWithRepository } = context.payload;
 

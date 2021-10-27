@@ -2,7 +2,7 @@ import { Probot } from 'probot'; // eslint-disable-line @typescript-eslint/no-un
 import { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import { dbConnect, initDatabase } from './db-connect';
-import { runOrgAction as handlePush, handleRegister, handleReRun, handleCompletedRun, RegisterRequest } from './handlers';
+import { handlePush as handlePush, handleRegister, handleReRun, handleCompletedRun, RegisterRequest } from './handlers';
 import { AppConfig } from './config';
 import appConfigJson from '../app.config.json';
 
